@@ -59,7 +59,7 @@ int dequeue(void) {
 		#if DebugMode == 1
 				printf("DBGMSG | Cant deque a Value as Que is Empty\n");
 		#endif // DebugMode == 1
-		return -1;
+		return 0;
 	}
 	else 
 	{
@@ -74,15 +74,18 @@ int dequeue(void) {
 void display() {
 	#if DisplayQueFunction == 1
 		struct dataNode* pointerToTemporaryDataNode;
-		if ((pointerToFrontDataNode == NULL) && (pointerToRearDataNode == NULL)) {
-			printf("\nQueue is Empty\n");
+		if ((pointerToFrontDataNode == NULL) && (pointerToRearDataNode == NULL)) 
+		{
+			#if DebugMode == 1
+				printf("DBGMSG | Que is Empty\n");
+			#endif // DebugMode == 1
+			return 0;
 		}
 		else {
 			printf("The queue is \n");
 			pointerToTemporaryDataNode = pointerToFrontDataNode;
 			while (pointerToTemporaryDataNode) {
 				printf("+    %d     +", pointerToTemporaryDataNode->nodeData);
-
 				pointerToTemporaryDataNode = pointerToTemporaryDataNode->pointerToNextDataNode;
 			}
 			printf("NULL\n\n");
@@ -93,14 +96,14 @@ void display() {
 int main() {
 	#if UsageExample == 1
 		int choice = 0, value = 0;
-		printf("\nImplementation of Queue using Linked List\n");
+		printf("Implementation of a Queue using A Linked List\n");
 		while (choice != 4) {
 			printf("1.Enqueue\n2.Dequeue\n3.Display\n4.Exit\n");
-			printf("\nEnter your choice : ");
+			printf("Enter your choice : \n");
 			scanf_s("%d", &choice);
 			switch (choice) {
 			case 1:
-				printf("\nEnter the value to add to the Que: ");
+				printf("Enter the value to enqueue: ");
 				scanf_s("%d", &value);
 				enqueue(value);
 				break;
@@ -114,7 +117,7 @@ int main() {
 				exit(0);
 				break;
 			default:
-				printf("\nWrong Choice\n");
+				printf("Wrong Choice\n");
 			}
 		}
 	#endif // UsageExample == 1
